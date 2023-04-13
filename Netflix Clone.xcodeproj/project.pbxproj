@@ -18,6 +18,8 @@
 		604FECB129DF3E2600E8F8AB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604FECB029DF3E2600E8F8AB /* SearchViewController.swift */; };
 		604FECB329DF3E4500E8F8AB /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604FECB229DF3E4500E8F8AB /* DownloadsViewController.swift */; };
 		604FECBB29DF478200E8F8AB /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604FECBA29DF478200E8F8AB /* CollectionViewTableViewCell.swift */; };
+		604FECBD29E03B2200E8F8AB /* HeroHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604FECBC29E03B2200E8F8AB /* HeroHeaderUIView.swift */; };
+		606DE07329E87EDE00AED6AA /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606DE07229E87EDE00AED6AA /* APICaller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		604FECB029DF3E2600E8F8AB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		604FECB229DF3E4500E8F8AB /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		604FECBA29DF478200E8F8AB /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
+		604FECBC29E03B2200E8F8AB /* HeroHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderUIView.swift; sourceTree = "<group>"; };
+		606DE07229E87EDE00AED6AA /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				604FECBA29DF478200E8F8AB /* CollectionViewTableViewCell.swift */,
+				604FECBC29E03B2200E8F8AB /* HeroHeaderUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 		604FECB929DF474E00E8F8AB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				606DE07229E87EDE00AED6AA /* APICaller.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -216,6 +222,8 @@
 				604FECB129DF3E2600E8F8AB /* SearchViewController.swift in Sources */,
 				604FEC9329DF154900E8F8AB /* MainTabBarViewController.swift in Sources */,
 				604FECBB29DF478200E8F8AB /* CollectionViewTableViewCell.swift in Sources */,
+				606DE07329E87EDE00AED6AA /* APICaller.swift in Sources */,
+				604FECBD29E03B2200E8F8AB /* HeroHeaderUIView.swift in Sources */,
 				604FECB329DF3E4500E8F8AB /* DownloadsViewController.swift in Sources */,
 				604FEC8F29DF154900E8F8AB /* AppDelegate.swift in Sources */,
 				604FEC9129DF154900E8F8AB /* SceneDelegate.swift in Sources */,

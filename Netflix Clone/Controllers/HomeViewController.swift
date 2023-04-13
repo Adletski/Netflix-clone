@@ -12,6 +12,8 @@ class HomeViewController: UIViewController {
     
     //MARK: - Properties
     
+    let sectionTitles: [String] = ["Trending Movies","Popular","Trending TV","Upcoming movies","Top rated"]
+    
     //MARK: - UI Elements
     
     private let homeFeedTable: UITableView = {
@@ -20,14 +22,59 @@ class HomeViewController: UIViewController {
         return table
     }()
     
-    //MARK: - Methods
+    //MARK: - ViewDidLoad SetupViews SetupConstraints
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupViews()
+        getTrendingMovies()
+    }
+    
+    private func setupViews() {
+        view.backgroundColor = .systemBackground
+        view.addSubview(homeFeedTable)
+        homeFeedTable.delegate = self
+        homeFeedTable.dataSource = self
+        title = "Главная"
+        configureNavBar()
+        
+        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 400))
+        homeFeedTable.tableHeaderView = headerView
         setupConstraints()
     }
     
+    private func configureNavBar() {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        imageView.image = UIImage(named: "netflix")
+        imageView.image = imageView.image?.withRenderingMode(.alwaysOriginal)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: imageView.image, style: .done, target: self, action: nil)
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
+            UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
+        ]
+        navigationController?.navigationBar.tintColor = .black
+    }
+    
+    private func setupConstraints() {
+        homeFeedTable.snp.makeConstraints {
+            $0.edges.equalTo(view)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        homeFeedTable.frame = view.bounds
+    }
+    
+    private func getTrendingMovies() {
+        APICaller.shared.getTrendingMovies { _ in
+            
+        }
+    }
+    
+    //MARK: - Methods
     
 }
 
@@ -36,7 +83,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 20
+        return sectionTitles.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,7 +92,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell()  }
-        
         return cell
     }
     
@@ -56,20 +102,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-}
-
-extension HomeViewController {
     
-    private func setupViews() {
-        view.backgroundColor = .systemBackground
-        view.addSubview(homeFeedTable)
-        homeFeedTable.delegate = self
-        homeFeedTable.dataSource = self
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        header.textLabel?.frame = CGRect(x: header.bounds.origin.x + 20, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
+        header.textLabel?.textColor = .black
+        header.textLabel?.text = header.textLabel?.text?.lowercased()
     }
     
-    private func setupConstraints() {
-        homeFeedTable.snp.makeConstraints {
-            $0.edges.equalTo(view)
-        }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let defaultOffset = view.safeAreaInsets.top
+        let offset = scrollView.contentOffset.y + defaultOffset
+        navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
+    }
+    
 }

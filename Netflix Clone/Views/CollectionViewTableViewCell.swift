@@ -16,19 +16,33 @@ class CollectionViewTableViewCell: UITableViewCell {
     
     //MARK: - UI Elements
     private let collectionView: UICollectionView = {
-        
-       let layout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: 140, height: 200)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         return collectionView
     }()
     
+    //MARK: - Methods
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupViews()
+    }
+    
+    private func setupViews() {
+        contentView.addSubview(collectionView)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         setupConstraints()
+    }
+    
+    private func setupConstraints() {
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -47,18 +61,5 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .red
         return cell
-    }
-}
-
-extension CollectionViewTableViewCell {
-    private func setupViews() {
-        contentView.backgroundColor = .systemPink
-        contentView.addSubview(collectionView)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-    }
-    
-    private func setupConstraints() {
-        
     }
 }
