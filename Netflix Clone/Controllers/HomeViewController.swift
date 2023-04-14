@@ -36,7 +36,6 @@ class HomeViewController: UIViewController {
         view.addSubview(homeFeedTable)
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
-        title = "Главная"
         configureNavBar()
         
         let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
@@ -45,8 +44,8 @@ class HomeViewController: UIViewController {
     }
     
     private func configureNavBar() {
-        let netflixImage = UIImage(named: "netflix")
-        var resizedNetflixImage = netflixImage?.resized(to: CGSize(width: 70, height: 50))
+        let netflixImage = UIImage(named: "netflixicon")
+        var resizedNetflixImage = netflixImage?.resized(to: CGSize(width: 80, height: 50))
         resizedNetflixImage = resizedNetflixImage?.withRenderingMode(.alwaysOriginal)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: resizedNetflixImage, style: .done, target: self, action: nil)
