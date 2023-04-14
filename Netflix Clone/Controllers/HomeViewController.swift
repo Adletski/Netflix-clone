@@ -39,17 +39,17 @@ class HomeViewController: UIViewController {
         title = "Главная"
         configureNavBar()
         
-        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 400))
+        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
         homeFeedTable.tableHeaderView = headerView
         setupConstraints()
     }
     
     private func configureNavBar() {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        imageView.image = UIImage(named: "netflix")
-        imageView.image = imageView.image?.withRenderingMode(.alwaysOriginal)
+        let netflixImage = UIImage(named: "netflix")
+        var resizedNetflixImage = netflixImage?.resized(to: CGSize(width: 70, height: 50))
+        resizedNetflixImage = resizedNetflixImage?.withRenderingMode(.alwaysOriginal)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: imageView.image, style: .done, target: self, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: resizedNetflixImage, style: .done, target: self, action: nil)
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
@@ -121,4 +121,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
     
+}
+
+extension UIImage {
+    func resized(to size: CGSize) -> UIImage {
+            return UIGraphicsImageRenderer(size: size).image { _ in
+                draw(in: CGRect(origin: .zero, size: size))
+            }
+        }
 }
