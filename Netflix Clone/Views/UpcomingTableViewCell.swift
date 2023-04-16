@@ -63,7 +63,6 @@ class UpcomingTableViewCell: UITableViewCell {
     }
     
     public func configure(with model: TitleViewModel) {
-        print(model.posterURL)
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model.posterURL)") else { return }
         
         titlePosterImageView.sd_setImage(with: url)
